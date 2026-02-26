@@ -186,7 +186,21 @@ button.save-btn:disabled {
 <body>
   <div id="app">
     <h1>卧推增力计划</h1>
-    <p>页面骨架</p>
+
+    <div class="input-section">
+      <label for="maxWeight">最大重量</label>
+      <input type="number" id="maxWeight" value="95" min="1" max="500" step="0.5">
+      <span class="unit">kg</span>
+      <button class="calc-btn" onclick="calculate()">计算</button>
+    </div>
+
+    <div class="cards-grid" id="cardsGrid">
+      <!-- 由 JS 动态生成 -->
+    </div>
+
+    <div class="save-section">
+      <button class="save-btn" onclick="saveImage()">保存图片</button>
+    </div>
   </div>
   <script>
     // placeholder
