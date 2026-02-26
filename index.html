@@ -203,7 +203,122 @@ button.save-btn:disabled {
     </div>
   </div>
   <script>
-    // placeholder
+    const LEVELS = [
+  {
+    name: '级别一',
+    sets: [
+      { ratio: 0.50, reps: '10' },
+      { ratio: 0.70, reps: '5' },
+      { ratio: 0.85, reps: '3' },
+      { ratio: 0.85, reps: '5' },
+      { ratio: 0.70, reps: '10' },
+      { ratio: 0.60, reps: '10' },
+    ]
+  },
+  {
+    name: '级别二',
+    sets: [
+      { ratio: 0.50, reps: '10' },
+      { ratio: 0.75, reps: '5' },
+      { ratio: 0.85, reps: '3' },
+      { ratio: 0.90, reps: '2~3' },
+      { ratio: 0.85, reps: '5' },
+      { ratio: 0.80, reps: '7' },
+    ]
+  },
+  {
+    name: '级别三',
+    sets: [
+      { ratio: 0.50, reps: '10' },
+      { ratio: 0.65, reps: '7' },
+      { ratio: 0.75, reps: '5' },
+      { ratio: 0.85, reps: '3' },
+      { ratio: 1.00, reps: '1~2' },
+      { ratio: 0.85, reps: '5' },
+    ]
+  },
+  {
+    name: '级别四',
+    sets: [
+      { ratio: 0.50, reps: '10' },
+      { ratio: 0.70, reps: '5' },
+      { ratio: 0.85, reps: '2' },
+      { ratio: 1.05, reps: '1~2' },
+      { ratio: 1.00, reps: '1' },
+      { ratio: 0.85, reps: '5' },
+    ]
+  }
+];
+
+function formatWeight(w) {
+  return Number.isInteger(w) ? String(w) : w.toFixed(1);
+}
+
+function calculate() {
+  const maxWeight = parseFloat(document.getElementById('maxWeight').value);
+  if (!maxWeight || maxWeight <= 0) return;
+
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = '';
+
+  LEVELS.forEach(level => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const rows = level.sets.map((s, i) => {
+      const weight = s.ratio * maxWeight;
+      return `
+        <tr>
+          <td>${i + 1}</td>
+          <td class="weight-cell">${formatWeight(weight)} kg</td>
+          <td>${s.reps}</td>
+        </tr>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="card-header">${level.name}</div>
+      <table>
+        <thead>
+          <tr>
+            <th>组</th>
+            <th>重量</th>
+            <th>次数</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+
+    grid.appendChild(card);
+  });
+}
+
+function saveImage() {
+  const btn = document.querySelector('.save-btn');
+  const grid = document.getElementById('cardsGrid');
+  const maxWeight = document.getElementById('maxWeight').value;
+
+  btn.disabled = true;
+  btn.textContent = '保存中...';
+
+  html2canvas(grid, {
+    backgroundColor: '#1a1a1a',
+    scale: 2,
+  }).then(canvas => {
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = `benchpress-${maxWeight}kg.png`;
+    a.click();
+  }).finally(() => {
+    btn.disabled = false;
+    btn.textContent = '保存图片';
+  });
+}
+
+document.getElementById('maxWeight').addEventListener('keydown', e => {
+  if (e.key === 'Enter') calculate();
+});
+
+calculate();
   </script>
 </body>
 </html>
