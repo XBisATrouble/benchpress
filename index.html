@@ -210,7 +210,7 @@ button.save-btn:disabled {
       { ratio: 0.50, reps: '10' },
       { ratio: 0.70, reps: '5' },
       { ratio: 0.85, reps: '3' },
-      { ratio: 0.85, reps: '5' },
+      { ratio: 0.80, reps: '5' },
       { ratio: 0.70, reps: '10' },
       { ratio: 0.60, reps: '10' },
     ]
@@ -251,8 +251,7 @@ button.save-btn:disabled {
 ];
 
 function formatWeight(w) {
-  const rounded = Math.round(w * 10) / 10;
-  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+  return w.toFixed(2);
 }
 
 function calculate() {
