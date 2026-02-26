@@ -251,7 +251,8 @@ button.save-btn:disabled {
 ];
 
 function formatWeight(w) {
-  return Number.isInteger(w) ? String(w) : w.toFixed(1);
+  const rounded = Math.round(w * 10) / 10;
+  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
 }
 
 function calculate() {
