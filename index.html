@@ -6,7 +6,181 @@
   <title>卧推增力计划</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
-    /* placeholder */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #1a1a1a;
+  color: #f0f0f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+
+#app {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #f5a623;
+  margin-bottom: 24px;
+  letter-spacing: 0.05em;
+}
+
+.input-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.input-section label {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.input-section input {
+  width: 100px;
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  background: #2a2a2a;
+  border: 2px solid #444;
+  border-radius: 8px;
+  color: #f0f0f0;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-section input:focus {
+  border-color: #f5a623;
+}
+
+.input-section .unit {
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+button.calc-btn {
+  padding: 8px 20px;
+  background: #f5a623;
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button.calc-btn:hover {
+  background: #e09510;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 800px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #242424;
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: #f5a623;
+  color: #1a1a1a;
+  text-align: center;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.card table th {
+  background: #2e2e2e;
+  color: #aaa;
+  font-size: 0.75rem;
+  padding: 6px 8px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+.card table td {
+  padding: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #2e2e2e;
+}
+
+.card table tr:last-child td {
+  border-bottom: none;
+}
+
+.card table tr:nth-child(even) td {
+  background: #272727;
+}
+
+.weight-cell {
+  color: #f5a623;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.save-section {
+  text-align: center;
+}
+
+button.save-btn {
+  padding: 12px 36px;
+  background: #2a2a2a;
+  color: #f5a623;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 2px solid #f5a623;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+button.save-btn:hover {
+  background: #f5a623;
+  color: #1a1a1a;
+}
+
+button.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
   </style>
 </head>
 <body>
